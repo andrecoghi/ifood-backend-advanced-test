@@ -24,13 +24,7 @@ import com.github.benmanes.caffeine.cache.Ticker;
 import com.google.common.testing.FakeTicker;
 
 import br.com.ifood.Application;
-import br.com.ifood.domain.openweather.Clouds;
-import br.com.ifood.domain.openweather.Coord;
-import br.com.ifood.domain.openweather.Main;
 import br.com.ifood.domain.openweather.OpenWeather;
-import br.com.ifood.domain.openweather.Sys;
-import br.com.ifood.domain.openweather.Weather;
-import br.com.ifood.domain.openweather.Wind;
 import br.com.ifood.service.OpenWeatherService;
 
 @RunWith(SpringRunner.class)
@@ -60,8 +54,7 @@ public class SuggestionCacheTest {
 
 	@Before
 	public void setUp() throws Exception {
-		OpenWeather ow = stubWheather(CITY_NAME);
-		doReturn(ow).when(restTemplate).getForObject(anyString(), eq(OpenWeather.class));
+		doReturn("").when(restTemplate).getForObject(anyString(), eq(String.class));
 	}
 
 	@Test
@@ -81,10 +74,6 @@ public class SuggestionCacheTest {
 		owService.getWeather(CITY_NAME);
 		verify(restTemplate, times(2)).getForObject(anyString(), eq(OpenWeather.class));
 
-	}
-
-	private OpenWeather stubWheather(String cityName) {
-		return new OpenWeather("", "", new Clouds(), new Coord(), new Wind(), "", "", new Sys(), cityName, "", new Weather[1], new Main());
 	}
 
 }

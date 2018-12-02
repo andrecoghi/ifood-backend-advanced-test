@@ -2,8 +2,6 @@ package br.com.ifood.service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.ExecutionException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -22,24 +20,12 @@ public class SpotifyService extends StreamingService {
 	@HystrixCommand(fallbackMethod = "playlistByCityFallback")
 	public ResponseModel getPlaylistBy(String cityName) {
 
-		CompletableFuture<String> tempFuture = openWeatherService.getWeather(cityName);
-
-		Double temp = null;
-		List<String> tracks = null;
-		try {
-			temp = Double.parseDouble(tempFuture.get());
-			CompletableFuture<List<String>> tracksFuture = super.getTracksBy(temp);
-			tracks = tracksFuture.get();
-		} catch (InterruptedException e) {
-			super.logger.info(e.getMessage());
-			e.printStackTrace();
-		} catch (ExecutionException e) {
-			super.logger.info(e.getMessage());
-			e.printStackTrace();
-		}
+		final Double temp = Double.parseDouble(openWeatherService.getWeather(cityName));
 
 		final List<String> msgs = new ArrayList<>(1);
 		msgs.add("Temperatura em Celsius: " + temp);
+
+		final List<String> tracks = super.getTracksBy(temp);
 
 		return new ResponseModel(temp, HttpStatus.OK.getReasonPhrase(), HttpStatus.OK.value(), msgs, tracks);
 
@@ -48,24 +34,12 @@ public class SpotifyService extends StreamingService {
 	@HystrixCommand(fallbackMethod = "playlistByCoordinatesFallback")
 	public ResponseModel getPlaylistBy(Double latitude, Double longitude) {
 
-		CompletableFuture<String> tempFuture = openWeatherService.getWeather(latitude, longitude);
-
-		Double temp = null;
-		List<String> tracks = null;
-		try {
-			temp = Double.parseDouble(tempFuture.get());
-			CompletableFuture<List<String>> tracksFuture = super.getTracksBy(temp);
-			tracks = tracksFuture.get();
-		} catch (InterruptedException e) {
-			super.logger.info(e.getMessage());
-			e.printStackTrace();
-		} catch (ExecutionException e) {
-			super.logger.info(e.getMessage());
-			e.printStackTrace();
-		}
+		final Double temp = Double.parseDouble(openWeatherService.getWeather(latitude, longitude));
 
 		final List<String> msgs = new ArrayList<>(1);
 		msgs.add("Temperatura em Celsius: " + temp);
+
+		final List<String> tracks = super.getTracksBy(temp);
 
 		return new ResponseModel(temp, HttpStatus.OK.getReasonPhrase(), HttpStatus.OK.value(), msgs, tracks);
 	}

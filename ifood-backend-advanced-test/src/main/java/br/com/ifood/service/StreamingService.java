@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
-import java.util.concurrent.CompletableFuture;
 import java.util.stream.Collectors;
 
 import org.slf4j.Logger;
@@ -13,10 +12,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.core.env.Environment;
 import org.springframework.http.HttpStatus;
-import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
 
-import br.com.ifood.config.AsyncConfiguration;
 import br.com.ifood.domain.ResponseModel;
 import br.com.ifood.domain.spotify.Items;
 import br.com.ifood.domain.spotify.Query;
@@ -56,9 +53,8 @@ public class StreamingService {
 		return token.getAccess_token();
 	}
 
-	@Async(AsyncConfiguration.TASK_EXECUTOR_SERVICE)
 	@Cacheable("tracksByMusicStyle")
-	protected CompletableFuture<List<String>> getTracksBy(Double temperature) {
+	protected List<String> getTracksBy(Double temperature) {
 		List<String> result = new ArrayList<>();
 
 		String musicStyle = new TemperatureContext(temperature).getSuggestion();
@@ -69,7 +65,7 @@ public class StreamingService {
 
 		items.stream().map(Items::getName).forEach(result::add);
 
-		return CompletableFuture.completedFuture(result);
+		return result;
 	}
 
 	protected ResponseModel playlistByCityFallback(String cityName) {
