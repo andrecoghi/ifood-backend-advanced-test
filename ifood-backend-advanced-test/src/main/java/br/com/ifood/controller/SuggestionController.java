@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.com.ifood.domain.ResponseModel;
 import br.com.ifood.service.SpotifyService;
+import br.com.ifood.utils.StringUtils;
 
 @RestController
 @RequestMapping("/suggestion")
@@ -17,8 +18,8 @@ public class SuggestionController {
 	SpotifyService sptfyService;
 
 	@GetMapping("/city/{name}")
-	public ResponseModel findByCityName(@PathVariable("name")  String cityName) {
-		return sptfyService.getPlaylistBy(cityName);
+	public ResponseModel findByCityName(@PathVariable("name") String cityName) {
+		return sptfyService.getPlaylistBy(StringUtils.nomalize(cityName));
 	}
 
 	@GetMapping("/coordinates/lat/{lat}/lon/{lon}")
