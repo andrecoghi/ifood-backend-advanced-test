@@ -13,13 +13,12 @@ For the temperature data I used [OpenWeatherMaps API](https://openweathermap.org
 <br/>
 
 **To Development this project I used the following technologies and frameworks:**
-
- - Maven;
- - Spring Boot;
- - Java 8;
- - jUnit;
+ - Maven
+ - Spring Boot
+ - Java 8
+ - jUnit
  - Caffeine Cache
- - Hystrix.
+ - Hystrix
  
  <br/>
  
