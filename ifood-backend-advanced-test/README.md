@@ -24,9 +24,7 @@ For the temperature data I used [OpenWeatherMaps API](https://openweathermap.org
  <br/>
  
 **Endpoints to test:**
- 
- <br/>
- 
+<br/>
 (http://localhost:8080/ifood/playlist?city=campinas)
 
 (http://localhost:8080/ifood/playlist?lat=35&lon=139)
