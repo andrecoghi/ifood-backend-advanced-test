@@ -6,13 +6,13 @@ This repository contains my solution for the iFood Backend Advanced Test.
 
 Proposed problem:
 <br/>
-"Create a micro-service capable to receive RESTful requests receiving as parameter either city name or latitude and longitude coordinates and returns some music track names suggestion according to the current temperature."
+"Create a micro-service capable to receive RESTful requests receiving as parameter either city name or latitude and longitude coordinates and that returns soundtracks according to the current temperature."
 <br/>
 
 For the temperature data I used [OpenWeatherMaps API](https://openweathermap.org/) and [Spotify](https://developer.spotify.com/) for the song tracks.
 <br/>
 
-To Development this project I used the following  technologies and frameworks:
+To Development this project I used the following technologies and frameworks:
 
  - Maven;
  - Spring Boot;
