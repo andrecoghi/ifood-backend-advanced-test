@@ -7,18 +7,18 @@ import static br.com.ifood.strategy.TemperatureEnum.CHILLY_MIN;
 
 public interface TemperatureRules {
 
-	static String getSuggestion(Double temp) {
+	static String getMusicStyle(Double temp) {
 		if (isHot(temp))
-			return new Hot().getSuggestion();
+			return new Hot().getMusicStyle();
 
 		else if (isAverage(temp))
-			return new Average().getSuggestion();
+			return new Average().getMusicStyle();
 
 		else if (isChilly(temp))
-			return new Chilly().getSuggestion();
+			return new Chilly().getMusicStyle();
 
 		else
-			return new Freezing().getSuggestion();
+			return new Freezing().getMusicStyle();
 	}
 
 	static boolean isHot(Double temp) {

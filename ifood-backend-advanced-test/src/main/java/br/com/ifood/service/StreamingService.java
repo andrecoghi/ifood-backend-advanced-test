@@ -57,7 +57,7 @@ public class StreamingService {
 	protected List<String> getTracksBy(Double temperature) {
 		List<String> result = new ArrayList<>();
 
-		String musicStyle = new TemperatureContext(temperature).getSuggestion();
+		String musicStyle = new TemperatureContext(temperature).getMusicStyle();
 
 		Query queryResult = sptfyGateway.getTracksBy(musicStyle, getToken());
 
@@ -89,7 +89,7 @@ public class StreamingService {
 
 		messagesList.add("This api is out of service");
 		messagesList.add("Max timeout (seconds) : " + (timeout / 1000));
-		messagesList.add("Returning default track suggestions");
+		messagesList.add("Returning default soundtracks");
 
 		tracksList.add("Sweet Child O' Mine");
 		tracksList.add("Livin' On a Prayer");

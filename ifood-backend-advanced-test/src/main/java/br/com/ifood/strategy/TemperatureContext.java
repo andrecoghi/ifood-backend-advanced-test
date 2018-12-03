@@ -12,7 +12,7 @@ public class TemperatureContext implements TemperatureRules{
 		this.temperature = temperature;
 	}
 
-	public String getSuggestion() {
-		return TemperatureRules.getSuggestion(temperature);
+	public String getMusicStyle() {
+		return TemperatureRules.getMusicStyle(temperature);
 	}
 }

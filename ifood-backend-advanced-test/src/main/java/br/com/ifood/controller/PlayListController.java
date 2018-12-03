@@ -11,8 +11,8 @@ import br.com.ifood.service.SpotifyService;
 import br.com.ifood.utils.StringUtils;
 
 @RestController
-@RequestMapping("/songs")
-public class SongsController {
+@RequestMapping("/playlist")
+public class PlayListController {
 
 	@Autowired
 	SpotifyService sptfyService;
@@ -22,7 +22,7 @@ public class SongsController {
 		return sptfyService.getPlaylistBy(StringUtils.nomalize(cityName));
 	}
 
-	@GetMapping("/coordinates/lat/{lat}/lon/{lon}")
+	@GetMapping("/lat/{lat}/lon/{lon}")
 	public ResponseModel findByCoordinates(@PathVariable(value = "lat") Double lat,
 			@PathVariable(value = "lon") Double lon) {
 		return sptfyService.getPlaylistBy(lat, lon);
