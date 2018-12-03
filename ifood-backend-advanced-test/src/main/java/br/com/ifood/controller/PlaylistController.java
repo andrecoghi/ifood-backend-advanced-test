@@ -10,7 +10,7 @@ import br.com.ifood.service.SpotifyService;
 import br.com.ifood.utils.StringUtils;
 
 @RestController
-public class PlayListController {
+public class PlaylistController {
 
 	@Autowired
 	SpotifyService sptfyService;
