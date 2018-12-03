@@ -11,8 +11,8 @@ import br.com.ifood.service.SpotifyService;
 import br.com.ifood.utils.StringUtils;
 
 @RestController
-@RequestMapping("/suggestion")
-public class SuggestionController {
+@RequestMapping("/songs")
+public class SongsController {
 
 	@Autowired
 	SpotifyService sptfyService;
