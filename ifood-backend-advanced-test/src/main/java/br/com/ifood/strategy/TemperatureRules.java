@@ -1,9 +1,6 @@
 package br.com.ifood.strategy;
 
-import static br.com.ifood.strategy.TemperatureEnum.AVERAGE_MAX;
-import static br.com.ifood.strategy.TemperatureEnum.AVERAGE_MIN;
-import static br.com.ifood.strategy.TemperatureEnum.CHILLY_MAX;
-import static br.com.ifood.strategy.TemperatureEnum.CHILLY_MIN;
+import static br.com.ifood.strategy.TemperatureEnum.*;
 
 public interface TemperatureRules {
 
@@ -22,7 +19,7 @@ public interface TemperatureRules {
 	}
 
 	static boolean isHot(Double temp) {
-		return temp.compareTo(30D) >= 0;
+		return temp.compareTo(HOT.value()) >= 0;
 	}
 
 	static boolean isAverage(Double temp) {
