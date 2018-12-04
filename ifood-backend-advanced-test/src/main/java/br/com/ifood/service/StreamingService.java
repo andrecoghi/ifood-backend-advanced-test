@@ -9,7 +9,6 @@ import java.util.stream.Collectors;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.core.env.Environment;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
@@ -53,7 +52,6 @@ public class StreamingService {
 		return token.getAccess_token();
 	}
 
-	@Cacheable("tracksByMusicStyle")
 	protected List<String> getTracksBy(Double temperature) {
 		List<String> result = new ArrayList<>();
 

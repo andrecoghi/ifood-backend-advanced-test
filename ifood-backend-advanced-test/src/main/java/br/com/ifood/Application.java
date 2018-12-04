@@ -33,12 +33,11 @@ public class Application {
 
 	@Bean
 	public CacheManager cacheManager(Ticker ticker) {
-		CaffeineCache cityNameCache = buildCache("openWeatherCityName", ticker, 90);
-		CaffeineCache coordinatesCache = buildCache("openWeatherCoordinates", ticker, 30);
-		CaffeineCache tracksCache = buildCache("tracksByMusicStyle", ticker, 30);
+		CaffeineCache cityNameCache = buildCache("playlistToCityName", ticker, 90);
+		CaffeineCache coordinatesCache = buildCache("playlistToCoordinates", ticker, 90);
 
 		SimpleCacheManager manager = new SimpleCacheManager();
-		manager.setCaches(Arrays.asList(cityNameCache, coordinatesCache, tracksCache));
+		manager.setCaches(Arrays.asList(cityNameCache, coordinatesCache));
 		return manager;
 	}
 

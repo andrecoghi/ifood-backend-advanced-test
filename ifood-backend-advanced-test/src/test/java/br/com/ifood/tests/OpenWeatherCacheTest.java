@@ -31,7 +31,8 @@ import br.com.ifood.domain.openweather.OpenWeather;
 import br.com.ifood.domain.openweather.Sys;
 import br.com.ifood.domain.openweather.Weather;
 import br.com.ifood.domain.openweather.Wind;
-import br.com.ifood.service.OpenWeatherService;
+import br.com.ifood.gateway.SpotifyGateway;
+import br.com.ifood.service.SpotifyService;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -56,7 +57,10 @@ public class OpenWeatherCacheTest {
 	private RestTemplate restTemplate;
 
 	@Autowired
-	private OpenWeatherService owService;
+	private SpotifyService sptfyService;
+
+	@Autowired
+	SpotifyGateway spotifyGateway;
 
 	@Before
 	public void setUp() throws Exception {
@@ -67,18 +71,19 @@ public class OpenWeatherCacheTest {
 	@Test
 	public void shouldUseCachesWithDifferentTTL() throws Exception {
 		// 0 minutes
-		owService.getWeather(CITY_NAME);
+
+		sptfyService.getPlaylistBy(CITY_NAME);
 		verify(restTemplate, times(1)).getForObject(anyString(), eq(OpenWeather.class));
 
 		// after 5 minutes
 		TestConfig.fakeTicker.advance(5, TimeUnit.MINUTES);
-		owService.getWeather(CITY_NAME);
+		sptfyService.getPlaylistBy(CITY_NAME);
 		verify(restTemplate, times(1)).getForObject(anyString(), eq(OpenWeather.class));
 
 		// after 95 minutes we expect the cached 'openWeatherCityName'
 		// is expired which we confirm by another call to the endpoint.
 		TestConfig.fakeTicker.advance(90, TimeUnit.MINUTES);
-		owService.getWeather(CITY_NAME);
+		sptfyService.getPlaylistBy(CITY_NAME);
 		verify(restTemplate, times(2)).getForObject(anyString(), eq(OpenWeather.class));
 
 	}

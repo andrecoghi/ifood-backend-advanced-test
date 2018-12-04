@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
@@ -18,6 +19,7 @@ public class SpotifyService extends StreamingService {
 	private OpenWeatherService openWeatherService;
 
 	@HystrixCommand(fallbackMethod = "playlistByCityFallback")
+	@Cacheable("playlistToCityName")
 	public ResponseModel getPlaylistBy(String cityName) {
 
 		final Double temp = Double.parseDouble(openWeatherService.getWeather(cityName));
@@ -32,6 +34,7 @@ public class SpotifyService extends StreamingService {
 	}
 
 	@HystrixCommand(fallbackMethod = "playlistByCoordinatesFallback")
+	@Cacheable("playlistToCoordinates")
 	public ResponseModel getPlaylistBy(Double latitude, Double longitude) {
 
 		final Double temp = Double.parseDouble(openWeatherService.getWeather(latitude, longitude));
