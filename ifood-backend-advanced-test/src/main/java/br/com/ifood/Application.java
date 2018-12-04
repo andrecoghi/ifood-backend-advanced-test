@@ -34,7 +34,7 @@ public class Application {
 	@Bean
 	public CacheManager cacheManager(Ticker ticker) {
 		CaffeineCache cityNameCache = buildCache("playlistToCityName", ticker, 90);
-		CaffeineCache coordinatesCache = buildCache("playlistToCoordinates", ticker, 90);
+		CaffeineCache coordinatesCache = buildCache("playlistToCoordinates", ticker, 30);
 
 		SimpleCacheManager manager = new SimpleCacheManager();
 		manager.setCaches(Arrays.asList(cityNameCache, coordinatesCache));
